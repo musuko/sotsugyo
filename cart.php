@@ -88,11 +88,12 @@ if (!empty($_SESSION['product'])) {
         //削除リンク表示。purchase-input.phpから、cart.phpがrequireされた場合、送り先を変える
         // var_dump(trim($_SESSION['filename']));echo '<br>';
         // var_dump("purchase-input.php");
-        if (trim($_SESSION['filename']) == 'purchase-input.php') {
-            //URLパラメータ'id'を送る　To:purchase-delete.php
-            echo '<td><a href="purchase-delete.php?id=', $id, '">削除</a></td>';
-        } else {
-
+        if (isset($filename)) { 
+            if (trim($filename) == 'purchase-input.php') {
+                //URLパラメータ'id'を送る　To:purchase-delete.php
+                echo '<td><a href="purchase-delete.php?id=', $id, '">削除</a></td>';
+            }
+       } else {
             //URLパラメータ'id'を送る　To:cart-delete.php
             echo '<td><a href="cart-delete.php?id=', $id, '">削除</a></td>';
         }
@@ -100,8 +101,7 @@ if (!empty($_SESSION['product'])) {
         $subtotal = 0;
         echo '</tr>';
     }
-    $_SESSION['filename'] = "";
-
+    // $_SESSION['filename'] = "";
     echo '<tr><td>小計</td><td></td><td></td><td></td><td></td><td></td><td>',
     number_format($total), '</td><td></td></tr>';
     //セッションに格納する
@@ -120,7 +120,6 @@ if (!empty($_SESSION['product'])) {
     number_format($total), '</td><td></td></tr>';
 
     echo '</table>';
-
 } else {
     echo '<div class="left2"><span style="color: #FF6666;">カートに商品がありません。</span></div>';
 }

@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php if(!isset($_SESSION)){ session_start(); } ?>
 <?php require 'header.php'; ?>
 <?php require 'menu.php'; ?>
 
@@ -15,7 +15,8 @@ $address = $_SESSION['customer']['address'];
 echo '<div class="page"> </div>';
 //このファイル名を$file_nameに入れる。curt.phpに送るため。
 $path = __FILE__;
-$_SESSION['filename'] = basename($path);
+$filename = basename($path);
+// $_SESSION['filename'] = basename($path);
 echo '<div class="left2">';
 echo 'お名前：', $name, ' 様';
 echo '<br>';

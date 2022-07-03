@@ -7,8 +7,9 @@
 <form method="post">
 	<div class="page"> </div>
 	<div class="left1"><b>商品検索</b>
-	<input type="text" name="keyword">
-	<input type="submit" value="検索"></div>
+		<input type="text" name="keyword">
+		<input type="submit" value="検索">
+	</div>
 </form>
 <hr color="#e8e7de">
 
@@ -33,11 +34,12 @@ if (isset($_REQUEST['keyword'])) {
 } else {
 
 	//並べ替えのセッションがある場合、変数に代入
-	if (isset($_SESSION['direction'])) {
-		$direction = $_SESSION['direction'];
-	}
+	// if (isset($_SESSION['direction'])) {
+	// 	$direction = $_SESSION['direction'];
+	// }
 	//並べ替えの対象を変数に代入
 	$order = filter_input(INPUT_GET, 'order');
+	$direction =  filter_input(INPUT_GET, 'direction');
 	// 並べ替えの対象がない場合、idの昇順を基本とする.
 	//それ以外は、対象があるので、昇順、降順を入れ替える。
 	if ($order === null) {
@@ -57,7 +59,7 @@ if (isset($_REQUEST['keyword'])) {
 		$direction = 'ASC';
 	}
 	//昇順、降順をセッションに収める
-	$_SESSION['direction'] = $direction;
+	// $_SESSION['direction'] = $direction;
 	// var_dump($order);
 	// var_dump($direction);
 	$sql1 = 'SELECT * FROM product ORDER BY ' . $order . ' ' . $direction;
@@ -71,14 +73,14 @@ if (isset($_REQUEST['keyword'])) {
 if ($count !== "zero") {
 	#商品一覧をテキストボックスで表示
 	echo '<table class="table-product">';
-	echo '<th class="a"><a href="product.php?order=id">商品番号</a></th>
+	echo '<th class="a"><a href="product.php?order=id&direction='.$direction.'">商品番号</a></th>
 		<th class="b">おすすめ</th>
 		<th class="c">商品</th>
 		<th class="d">商品名</th>
 		<th class="e">価格</th>
 		<th class="f">セール価格</th>
-		<th class="g"><a href="product.php?order=daily_ranking">昨日ランク</a></th>
-		<th class="h"><a href="product.php?order=weekly_ranking">7日間ランク</a></th>';
+		<th class="g"><a href="product.php?order=daily_ranking&direction='.$direction.'">昨日ランク</a></th>
+		<th class="h"><a href="product.php?order=weekly_ranking&direction='.$direction.'">7日間ランク</a></th>';
 	// sale関数を呼び、sale日の場合、その価格をセール価格に反映する。
 	sale();
 	rank();
@@ -87,7 +89,8 @@ if ($count !== "zero") {
 	//取り出したデータを1行ずつ表示する。
 	//変更日、変更者は手入力修正不要と考えたので、表示のみとする。
 	foreach ($sql as $row) {
-		if ($row['display'] === "1") {
+		// var_dump($row);echo '<br>';
+		if ($row['display'] === 1) {
 			$sale_price = $_SESSION['sale'][$row['id']] ?? '';
 			echo '<tr>';
 			echo '<td>' . $row['id'] . '</td>';
@@ -206,7 +209,11 @@ function rank()
 			// $count_rank[$i] += 1;
 		}
 		//売上実績がある最下位の順位に、1を加える。
-		$count_rank[$i] = $row['rank'] + 1;
+		if (isset($row['rank'])) {
+			$count_rank[$i] = $row['rank'] + 1;
+		} else {
+			$count_rank[$i] = 0;
+		}
 	}
 	//購入記録がなくランキングが出ない商品、0 またはnullの商品に、指定した値を入れる
 	//$i  0の場合、daily, 1の場合、weekly
