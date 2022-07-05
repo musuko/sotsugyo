@@ -2,229 +2,204 @@
 <?php require 'header.php'; ?>
 <?php require 'menu.php'; ?>
 <?php
+echo '<div class="page"> </div>';
+//空の変数を用意する
+$name1 = $name2 = $address1 = $address2 =$address3 =$address4 = $login = $password = $furigana1 = $furigana2 = $postcode = $telno = $birthdate = $email = '';
+$error_name1 = $error_name2 = $error_address1 = $error_address2 = $error_address3 = $error_address4 = $error_login = $error_password = $error_furigana1 =
+    $error_furigana2 = $error_postcode = $error_telno = $error_birthdate = $error_email =  $error_full = '';
 
-//変数を用意する
-//$name1とname2を追加
-$name1 = $name2 = $address = $login = $password = $furigana1 = $furigana2 = $postcode = $telno = $birthdate = $email = '';
-echo '<div class="page"></div>';
-
+//var_dump($_POST);
 if (isset($_SESSION['customer'])) {                      //ログインしている場合
-
     $id = $_SESSION['customer']['id'];
-    $name1_1 = $_SESSION['customer']['name1'];
-    $name2_2 = $_SESSION['customer']['name2'];
-    $address1_c = $_SESSION['customer']['address1'];
-    $address2_c = $_SESSION['customer']['address2'];
-    $address4_c = $_SESSION['customer']['address4'];
-    $login_c = $_SESSION['customer']['login'];
-    $password_c = $_SESSION['customer']['password'];
-    $furigana1_1_c = $_SESSION['customer']['furigana1'];
-    $furigana2_2_c = $_SESSION['customer']['furigana2'];
-    $postcode_cus = $_SESSION['customer']['postcode'];
-    $telno_c = $_SESSION['customer']['telno'];
-    $birthdate_c = $_SESSION['customer']['birthdate'];
-    $email_c = $_SESSION['customer']['email'];
+    $name1 = $_SESSION['customer']['name1'];
+    $name2 = $_SESSION['customer']['name2'];
+    $address1 = $_SESSION['customer']['address1'];
+    $address2 = $_SESSION['customer']['address2'];
+    $address4 = $_SESSION['customer']['address4'];
+    $login = $_SESSION['customer']['login'];
+    $password = $_SESSION['customer']['password'];
+    $furigana1 = $_SESSION['customer']['furigana1'];
+    $furigana2 = $_SESSION['customer']['furigana2'];
+    $postcode = $_SESSION['customer']['postcode'];
+    $telno = $_SESSION['customer']['telno'];
+    $birthdate = $_SESSION['customer']['birthdate'];
+    $email = $_SESSION['customer']['email'];
 }
-
 if (isset($_SESSION['form'])) {                          //フォームに入力がある場合
     //$name1とname2を追加
-    $name1 = $_SESSION['form']['name1f'];
-    $name2 = $_SESSION['form']['name2f'];
-    $address1_1 = $_SESSION['form']['address1f'];
-    $address2_2 = $_SESSION['form']['address2f'];
-    $address4_4 = $_SESSION['form']['address4f'];
-    $login = $_SESSION['form']['loginf'];
-    $password = $_SESSION['form']['passwordf'];
+    $name1 = $_SESSION['form']['name1'];
+    $name2 = $_SESSION['form']['name2'];
+    $address1 = $_SESSION['form']['address1'];
+    $address2 = $_SESSION['form']['address2'];
+    $address3 = $_SESSION['form']['address3'];
+    $address4 = $_SESSION['form']['address4'];
+    $login = $_SESSION['form']['login'];
+    $password = $_SESSION['form']['password'];
     //フリガナの性と名を追加
-    $furigana1 = $_SESSION['form']['furigana1f'];
-    $furigana2 = $_SESSION['form']['furigana2f'];
-    $postcode_1 = $_SESSION['form']['postcodef'];$_SESSION['form']['postcodef'];
-    $telno = $_SESSION['form']['telnof'];
-    $birthdate = $_SESSION['form']['birthdatef'];
-    $email = $_SESSION['form']['emailf'];
+    $furigana1 = $_SESSION['form']['furigana1'];
+    $furigana2 = $_SESSION['form']['furigana2'];
+    $postcode = $_SESSION['form']['postcode'];
+    $telno = $_SESSION['form']['telno'];
+    $birthdate = $_SESSION['form']['birthdate'];
+    $email = $_SESSION['form']['email'];
 }
 
-//未記入エラー
 
-$error_postcode =
-    "<span style='color: #FF6666;'>" . $_SESSION['error']['postcode'] . "</span>";
-$error_address =
-    "<span style='color: #FF6666;'>" . $_SESSION['error']['address'] . "</span>";
-$error_telno =
-    "<span style='color: #FF6666;'>" . $_SESSION['error']['telno'] . "</span>";
-$error_birthdate =
-    "<span style='color: #FF6666;'>" . $_SESSION['error']['birthdate'] . "</span>";
-$error_email =
-    "<span style='color: #FF6666;'>" . $_SESSION['error']['email'] . "</span>";
-$error_login =
-    "<span style='color: #FF6666;'>" . $_SESSION['error']['login'] . "</span>";
-$error_password =
-    "<span style='color: #FF6666;'>" . $_SESSION['error']['password'] . "</span>";
-//エラー内容を追記できます～
+if (isset($_SESSION['error'])) {                      //エラーが送り返された場合
 
-//name1が苗字
-$error_name1 =
-    "<span style='color: #FF6666;'>" . $_SESSION['error']['name1'] . "</span>";
-//name2が名
-$error_name2 =
-    "<span style='color: #FF6666;'>" . $_SESSION['error']['name2'] . "</span>";
-//furigana1がカナ苗字
-$error_furigana1 =
-    "<span style='color: #FF6666;'>" . $_SESSION['error']['furigana1'] . "</span>";
-//furigana2がカナ名
-$error_furigana2 =
-    "<span style='color: #FF6666;'>" . $_SESSION['error']['furigana2'] . "</span>";
+    //未記入エラー
+    $error_postcode =
+        "<span style='color: #FF6666;'>" . $_SESSION['error']['postcode'] . "</span>";
+    $error_address =
+        "<span style='color: #FF6666;'>" . $_SESSION['error']['address'] . "</span>";
+    $error_telno =
+        "<span style='color: #FF6666;'>" . $_SESSION['error']['telno'] . "</span>";
+    $error_birthdate =
+        "<span style='color: #FF6666;'>" . $_SESSION['error']['birthdate'] . "</span>";
+    $error_email =
+        "<span style='color: #FF6666;'>" . $_SESSION['error']['email'] . "</span>";
+    $error_login =
+        "<span style='color: #FF6666;'>" . $_SESSION['error']['login'] . "</span>";
+    $error_password =
+        "<span style='color: #FF6666;'>" . $_SESSION['error']['password'] . "</span>";
+    //エラー内容を追記できます～
 
-echo' <div class=page>';
-echo' </div>';
+    //name1が苗字
+    $error_name1 =
+        "<span style='color: #FF6666;'>" . $_SESSION['error']['name1'] . "</span>";
+    //name2が名
+    $error_name2 =
+        "<span style='color: #FF6666;'>" . $_SESSION['error']['name2'] . "</span>";
+    //furigana1がカナ苗字
+    $error_furigana1 =
+        "<span style='color: #FF6666;'>" . $_SESSION['error']['furigana1'] . "</span>";
+    //furigana2がカナ名
+    $error_furigana2 =
+        "<span style='color: #FF6666;'>" . $_SESSION['error']['furigana2'] . "</span>";
+    // $error_full =
+    //     "<span style='color: #FF00FF;'>" . $_SESSION['error']['full'] . "</span>";
+}
 
-//郵便番号検索のコード
-$postcode=$_POST['postcode'];                                      //郵便番号を変数に入れる
-$url = "http://zipcloud.ibsnet.co.jp/api/search?zipcode=";        //郵便番号検索サイト
-$url= $url . $postcode;    //検索条件追加
-$json = file_get_contents($url);    //検索結果を$jsonに入れる
-$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');    //utf8にエンコード
-$arr = json_decode($json, true);        //jsonをでコード
-    echo '<pre>';
-    echo '</pre>';
-$arr_1 = $arr['results']['0'];
-$address1 = $arr['results']['0']["address1"];
-$address2 = $arr['results']['0']["address2"];
-$address3 = $arr['results']['0']["address3"];
-echo '<form action= "" method="post" id="seach">';
+//新しく追加
+echo '<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">';
+echo '<script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+<script src="postal_api.js"></script>';
 
-echo '</form>';
+echo '<form class="h-adr" method="post" action="customer-check.php" fit-content; margin: 0 auto">';
+echo '<span class="p-country-name" style="display:none;">Japan</span>';
 
-echo '<form action="customer-check.php" method="post" id="final">';
-echo '</form>';
+echo '<div class="left2">';
+echo '<table class="table-customer">';
 
-    echo '<div class=page>';
-    echo '<table>';
+echo '<tr><td class="title-ask"><b>会員登録情報</b></td></tr>';
+echo '<tr><th></th><tr>';
+echo '<tr><th></th><tr>';
+echo '<tr><th></th><tr>';
 
-        echo '<tr>
+
+echo '<tr>
                 <td>お名前</td>';
-            echo'<td>' . '性' . '<input type="text" name= "name1" size="15" form="seach" value= "'.$name1_1.$name1. $_POST['name1']. '"></td>';
-                //苗字が空欄の時のエラー
-            echo '<td>' . $error_name1 . '</td>';
+echo '<td>' . '姓 ' . '<input type="text" style="width:150px" class="name1" name="name1" size="15" id="name1" value= "', $name1, '"></td>';
+//苗字が空欄の時のエラー
+echo '<td>' . $error_name1 . '</td>';
 
-        echo '<tr><td></td>' . '<td>' . '名' . '<input type="text" name= "name2" size="15" form="seach" value= "',$name2,$name2_2,  $_REQUEST['name2'], '"></td>';
-            //名前が空欄の時のエラー
-            echo '<td>' . $error_name2. '</td>';
-        echo '</td></tr>';
+echo '<tr><td></td>' . '<td>' . '名 ' . '<input type="text" style="width:150px" class="name2" name="name2" size="15" id="name2" value= "', $name2, '"></td>';
+//名前が空欄の時のエラー
+echo '<td>' . $error_name2 . '</td>';
+echo '</td></tr>';
 
-        echo '<tr><td>フリガナ</td><td>';
-            echo 'セイ' . '<input type="text" name="furigana1" size="15" form="seach" value="',$furigana1,$furigana1_1_c,$_REQUEST['furigana1'], '"></td>';
-            //カナ苗字が空欄の時のエラー
-            echo '<td>' . $error_furigana1 . '</td>';
-        echo '<tr><td></td><td>' . 'メイ' . '<input type="text" name="furigana2" size="15" form="seach" value="',$furigana2,$furigana2_2_c, $_REQUEST['furigana2'], '">';
-            echo '</td>';
-            //カナ苗字が空欄の時のエラー
-            echo '<td>' . $error_furigana2 . '</td>
+echo '<tr><td>フリガナ</td><td>';
+echo 'セイ ' . '<input type="text" class="furigana1" name="furigana1" size="15" id="furigana1" value="', $furigana1, '"></td>';
+//カナ苗字が空欄の時のエラー
+echo '<td>' . $error_furigana1 . '</td>';
+echo '<tr><td></td><td>' . 'メイ ' . '<input type="text" class="furigana2" name="furigana2" size="15" id="furigana2" value="', $furigana2, '">';
+echo '</td>';
+//カナ苗字が空欄の時のエラー
+echo '<td>' . $error_furigana2 . '</td>
         </tr>';
-        echo '<tr><td>電話番号</td><td>';
-            echo '<input type="tel" name= "telno" form="seach" value= "', $telno,$telno_c,$_REQUEST['telno'] . '">';
-             echo '</td>';
-             echo '<td>' .$error_telno . '</td>
-        </tr>';
-
-         echo '<tr><td>生年月日</td><td>';
-            //type="text" を"date"に変更しました。sudo
-                echo '<input type="date" name= "birthdate" form="seach" value= "'.$birthdate. $_REQUEST['birthdate'] . '">';
-             echo '</td>';
-             echo '<td>' . $error_birthdate . '</td>
+echo '<tr><td>電話番号</td><td>';
+echo '<input type="tel" class="telno" name= "telno" id="telno" value= "', $telno, '">';
+echo '</td>';
+echo '<td>' . $error_telno . '</td>
         </tr>';
 
-        echo '<tr><td>メールアドレス</td><td>';
-            echo '<input type="email" name= "email" form="seach" value= "'.$email.$email_c . $_REQUEST['email'] . '">';
-            echo '</td>';
-            echo '<td>' . $error_email . '</td>
+echo '<tr><td>生年月日</td><td>';
+//type="text" を"date"に変更しました。sudo
+if (!isset($_SESSION['customer'])) {
+    echo '<input type="date"class="birthdate" name= "birthdate" id="birthdate" value= "' . $birthdate . '">';
+    echo '</td>';
+    echo '<td>' . $error_birthdate . '</td>
         </tr>';
-
-        echo '<tr><td>ログイン名</td><td>';
-            echo '<input type="text" name= "login" form="seach" value= "',$login,$login_c,$_REQUEST['login']. '">';
-            echo '</td>';
-            echo '<td>' . $error_login . '</td>
-        </tr>';
-        echo '<tr><td>パスワード</td><td>';
-            echo '<input type="password" name="password" form="seach" value= "',$password,$password_c,$_POST['password'], '">';
-            echo '</td>';
-        echo '<td>' . $error_password . '</td>
-        </tr>';
-        echo '<tr><td>郵便番号</td>';
-            echo '<td><input type="text" name="postcode" form="seach" value="'.$postcode_1.$postcode.$postcode_cus.'"></td>';
-            echo '</td>';
-            echo '<td>' . $error_postcode . '</td></tr>';
-        echo '<tr><td></td><td>';
-
-            //検索ボタン
-            echo '<button type="submit" name="seach" form="seach" value="seach">'.'検索'.'</button>';
-        echo'</td></tr>';
-
-        echo '<tr><td>ご住所</td></td>';
-            echo '<td>'.'都道府県'.'<input type="text" name= "address1" form="seach" value= "',$address1_c,$address1,$address1_1, '">';
-         echo '</td>';
-            echo '<td>' . $error_address . '</td></tr>';
-         echo '<tr><td></td><td>';
-         $addressf=$address2_2;
-         echo '市町村'.'<input type="text" name="address2" form="seach" value="',$address2_c,$address2_2,$address2,$address3, '"></td>';
-            echo '<tr><td></td><td>'.
-            '番地,アパート名'.'<input type="text" name="address4" form="seach" value="',$address4_c,$address4_4, '"></td>';
-        echo'</tr>';
-
-        //ログインされている時に未入力がある場合    customer-check.php  [Ln88～Ln93]2022/06/10 sudo
-        $error_full =
-            "<span style='color: #FF00FF;'>" . $_SESSION['error']['full'] . "</span>";
-        echo '<tr><td></td><td>' . $error_full . '</td></tr>';
-
-    echo '</table>';
-    echo '</div><br>';
-
-if (isset($_SESSION['customer'])) {
-    echo '<form action = "customer-check.php" method="post" id="kakutei">';
-    echo '<p style="display:inline;">';
-    echo '<input type="hidden" name="name1f" form="final" value="',$_POST['name1'],'">';
-    echo '<input type="hidden" name="name2f" form="final" value="',$_POST['name2'] ,'">';
-    echo '<input type="hidden" name="furigana1f" form="final" value="',$_POST['furigana1'] ,'">';
-    echo '<input type="hidden" name="furigana2f" form="final" value="',$_POST['furigana2'] ,'">';
-    echo '<input type="hidden" name="telnof" form="final" value="',$_POST['telno'] ,'">';
-    echo '<input type="hidden" name="birthdatef" form="final" value="',$_POST['birthdate'] ,'">';
-    echo '<input type="hidden" name="emailf" form="final" value="',$_POST['email'] ,'">';
-    echo '<input type="hidden" name="loginf" form="final" value="',$_POST['login'] ,'">';
-    echo '<input type="hidden" name="passwordf" form="final" value="',$_POST['password'] ,'">';
-    echo '<input type="hidden" name="postcodef" form="final" value="',$_POST['postcode'] ,'">';
-    echo '<input type="hidden" name="address1f" form="final" value="',$address1 ,'">';
-    echo '<input type="hidden" name="address2f" form="final" value="'. $address2.$address3 .'">';
-    echo '<input type="hidden" name="address4f" form="final" value="'. $_POST['address4'] .'">';
-    echo '<input type="submit" form="final" value="修正">';
-    var_dump($_SESSION['customer']);
-    echo '</form>';
-
-    echo '<form action = "withdrawal-input.php" method= "post">';
-    echo '<input type="submit" value="退会">';
-    echo '</form>';
-    echo '</p>';
-
-}else{
-    //↓追加
-
-    echo '<form action = "customer-check.php" method="post" form="kakutei">';
-    echo '<input type="hidden" name="name1f" form="final" value="',$_POST['name1'],'">';
-    echo '<input type="hidden" name="name2f" form="final" value="',$_POST['name2'] ,'">';
-    echo '<input type="hidden" name="furigana1f" form="final" value="',$_POST['furigana1'] ,'">';
-    echo '<input type="hidden" name="furigana2f" form="final" value="',$_POST['furigana2'] ,'">';
-    echo '<input type="hidden" name="telnof" form="final" value="',$_POST['telno'] ,'">';
-    echo '<input type="hidden" name="birthdatef" form="final" value="',$_POST['birthdate'] ,'">';
-    echo '<input type="hidden" name="emailf" form="final" value="',$_POST['email'] ,'">';
-    echo '<input type="hidden" name="loginf" form="final" value="',$_POST['login'] ,'">';
-    echo '<input type="hidden" name="passwordf" form="final" value="',$_POST['password'] ,'">';
-    echo '<input type="hidden" name="postcodef" form="final" value="',$_POST['postcode'] ,'">';
-    echo '<input type="hidden" name="address1f" form="final" value="',$address1 ,'">';
-    echo '<input type="hidden" name="address2f" form="final" value="'. $address2.$address3 .'">';
-    echo '<input type="hidden" name="address4f" form="final" value="'. $_POST['address4'] .'">';
-    echo '<button type="submit" name="confirm" form="final" value="kakutei">'.'確定'.'</button>';
-    echo '</form>';
+} else {
+    //substr_replace
+    //$birthdate =  substr_replace($birthdate,'/',4,0);
+    //$birthdate =  substr_replace($birthdate,'/',7,0);
+    echo '<input type="text" name="birthdate" readonly value="', $birthdate, '">';
 }
 
+
+echo '<tr><td>メールアドレス</td><td>';
+echo '<input type="email" class="email" name= "email" id="email" value= "' . $email . '">';
+echo '</td>';
+echo '<td>' . $error_email . '</td>
+        </tr>';
+
+echo '<tr><td>ログイン名</td><td>';
+echo '<input type="text" class="login" name= "login" id="login" value= "',  $login . '">';
+echo '</td>';
+echo '<td>' . $error_login . '</td>
+        </tr>';
+echo '<tr><td>パスワード</td><td>';
+echo '<input type="password" class="password" name="password" id="password" value= "', $password, '">';
+echo '</td>';
+echo '<td>' . $error_password . '</td>
+        </tr>';
+echo '<tr><td>郵便番号</td>';
+echo '<td><input type="text" class="p-postal-code" name="postcode" style="width:100px" id="postcode" value="' . $postcode . '"></td>';
+echo '</td>';
+echo '<td>' . $error_postcode . '</td></tr>';
+
+echo '<tr><td>ご住所</td></td>';
+echo '<td>' . '<input type="text" style="width:200px" class="p-region" name= "address1" id="address1" id="postcode" value= "', $address1, '">';
+echo '</td>';
+echo '<td>' . $error_address . '</td></tr>';
+echo '<tr><td></td><td>';
+//$addressf=$address2_2;
+echo '' . '<input type="text" style="width:200px" class="p-locality" name="address2" id="address1" id="postcode" value="', $address2, '"></td>';
+echo '<tr><td></td><td>' .
+
+    '' . '<input type="text" style="width:200px" class="p-street-address p-extended-address" name="address3" id="address1" id="postcode"
+     value="', $address3, '"></td>';
+echo '</tr>';
+
+echo '<tr><td>その他、マンション名等 ';
+echo '</td>';
+echo '<td>' . '<input type="text" style="width:200px" class="address4" name="address4" id="address4" value="', $address4, '"></td></tr>';
+//ログインされている時に未入力がある場合    customer-check.php  [Ln88～Ln93]2022/06/10 sudo
+
+// echo '<tr><td></td><td></td></tr>';
+
+echo '</table>';
+echo '</div><br>';
+
+//ログインしていない場合、確認に進む。ログインしている場合、修正に進む（退会もある）。どちらもcustomer-check.php
+if (!isset($_SESSION['customer'])) {
+
+    echo '<div class="left3">';
+    echo '<button type="submit" name="confirm" style="background-color:#77FFFF;" value="kakutei">' . '確認' . '</button>';
+    echo '</form></div>';
+    echo '<br><br>';
+} else {
+
+    echo '<table class="left3">';
+    echo '<td><input type="submit" style="color: white;background-color:#FF82B2;border-color:#9932CC;" value="修正"></td>';
+    echo '</form>';
+    echo '<form action = "withdrawal-input.php" method= "post">';
+    echo '<td><input type="submit" style="color: white;background-color:#9999FF;border-color: #CC0033;" value="退会"></td>';
+    echo '</form>';
+    echo '</table>';
+    echo '<br><br>';
+}
 
 //入力情報のセッションを初期化する
 unset($_SESSION['form']);
