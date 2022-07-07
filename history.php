@@ -26,7 +26,7 @@ if (isset($_SESSION['customer'])) {
 	$sw = 0;
 	//合計
 	$total = 0;
-
+	$subtotal_stock = 0;
 	foreach ($sql as $key => $value) {
 
 		//初期処理をする
@@ -36,7 +36,7 @@ if (isset($_SESSION['customer'])) {
 			//$swの値を切り替える
 			$sw = 1;
 		}
-
+		//purchase_idが変わった場合、変わる前の小計、消費税、合計を表示する
 		if ($purchaseid_check != $value['purchase_id']) {
 
 			echo '<tr><td>小計</td><td></td><td></td><td></td><td></td><td></td>' .
