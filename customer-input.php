@@ -5,7 +5,7 @@
 echo '<div class="page"> </div>';
 //空の変数を用意する
 $name1 = $name2 = $address1 = $address2 =$address3 =$address4 = $login = $password = $furigana1 = $furigana2 = $postcode = $telno = $birthdate = $email = '';
-$error_name1 = $error_name2 = $error_address1 = $error_address2 = $error_address3 = $error_address4 = $error_login = $error_password = $error_furigana1 =
+$error_name1 = $error_name2 = $error_address = $error_login = $error_password = $error_furigana1 =
     $error_furigana2 = $error_postcode = $error_telno = $error_birthdate = $error_email =  $error_full = '';
 
 //var_dump($_POST);
