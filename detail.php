@@ -39,6 +39,7 @@ $rating_result = round($rating['rating_sum'] / $rating['rating_count'], 2);
 //セール情報を確認する sale関数
 sale();
 $sale_price = $_SESSION['sale'][$product_id];
+unset ($_SESSION['sale'][$product_id]);
 // var_dump ($sale_price);
 
 //取り出したデータを表示する
