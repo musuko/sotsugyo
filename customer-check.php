@@ -94,10 +94,10 @@ if (!isset($_SESSION['customer'])) {
         $_SESSION['error']['address'] = '住所が未入力です。';
     }
 
-    if (empty($_POST['telno'])) {
+    if (empty($telno)) {
         $_SESSION['error']['telno'] = '電話番号が未入力です。';
         //アルファベットなどが入力さえていた場合
-    } elseif (!is_numeric($_POST['telno'])) {
+    } elseif (!is_numeric($telno)) {
         $_SESSION['error']['telno'] = 'その電話番号は使用出来ません。';
     } else {
         //数字以外が入力されていた場合
@@ -169,17 +169,19 @@ elseif (!is_numeric($postcode)) {
     $_SESSION['error']['login'] = '4文字以上で英小字,英大字,数字,各1文字以上を含むこと';
 }
 
-header("Location:customer-input.php");
 
-//エラーがない場合
-if (($_SESSION['error']) ) {
+if (count(array_filter($_SESSION['error']) ) !== 0) {
+    //エラーがある場合
+    header("Location:customer-input.php");
+    // echo '<a href="customer-input.php">戻る</a>';
+} else {
+    //エラーがない場合
     header("Location:customer-confirm.php");
+    // echo '<a href="customer-confirm.php">進む</a>';
 }
 
-var_dump($_SESSION['form']);echo '<br>';
+// var_dump($_SESSION['form']);echo '<br>';
 var_dump($_SESSION['error']);
-echo '<a href="customer-input.php">戻る</a>';
-echo '<a href="customer-confirm.php">進む</a>';
 ?>
 
 

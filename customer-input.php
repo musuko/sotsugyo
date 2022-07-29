@@ -4,7 +4,7 @@
 <?php
 echo '<div class="page"> </div>';
 //空の変数を用意する
-$name1 = $name2 = $address1 = $address2 =$address3 =$address4 = $login = $password = $furigana1 = $furigana2 = $postcode = $telno = $birthdate = $email = '';
+$name1 = $name2 = $address1 = $address2 = $address3 = $address4 = $login = $password = $furigana1 = $furigana2 = $postcode = $telno = $birthdate = $email = '';
 $error_name1 = $error_name2 = $error_address = $error_login = $error_password = $error_furigana1 =
     $error_furigana2 = $error_postcode = $error_telno = $error_birthdate = $error_email =  $error_full = '';
 
@@ -13,9 +13,9 @@ if (isset($_SESSION['customer'])) {                      //ログインしてい
     $id = $_SESSION['customer']['id'];
     $name1 = $_SESSION['customer']['name1'];
     $name2 = $_SESSION['customer']['name2'];
-    $address1 = $_SESSION['customer']['address1'];
-    $address2 = $_SESSION['customer']['address2'];
-    $address4 = $_SESSION['customer']['address4'];
+    $address1 = $_SESSION['customer']['address'];
+    // $address2 = $_SESSION['customer']['address2'];
+    // $address4 = $_SESSION['customer']['address4'];
     $login = $_SESSION['customer']['login'];
     $password = $_SESSION['customer']['password'];
     $furigana1 = $_SESSION['customer']['furigana1'];
@@ -25,7 +25,7 @@ if (isset($_SESSION['customer'])) {                      //ログインしてい
     $birthdate = $_SESSION['customer']['birthdate'];
     $email = $_SESSION['customer']['email'];
 }
-if (isset($_SESSION['form'])) {                          //フォームに入力がある場合
+if (isset($_SESSION['form'])) {                          //フォーム入力をcustomer-checkに送り、送り返された場合
     //$name1とname2を追加
     $name1 = $_SESSION['form']['name1'];
     $name2 = $_SESSION['form']['name2'];
@@ -92,10 +92,6 @@ echo '<div class="left2">';
 echo '<table class="table-customer">';
 
 echo '<tr><td class="title-ask"><b>会員登録情報</b></td></tr>';
-echo '<tr><th></th><tr>';
-echo '<tr><th></th><tr>';
-echo '<tr><th></th><tr>';
-
 
 echo '<tr>
                 <td>お名前</td>';
@@ -175,20 +171,17 @@ echo '</tr>';
 echo '<tr><td>その他、マンション名等 ';
 echo '</td>';
 echo '<td>' . '<input type="text" style="width:200px" class="address4" name="address4" id="address4" value="', $address4, '"></td></tr>';
-//ログインされている時に未入力がある場合    customer-check.php  [Ln88～Ln93]2022/06/10 sudo
-
-// echo '<tr><td></td><td></td></tr>';
 
 echo '</table>';
 echo '</div><br>';
 
-//ログインしていない場合、確認に進む。ログインしている場合、修正に進む（退会もある）。どちらもcustomer-check.php
+//ログインしていない場合、確認ボタンを表示する。ログインしている場合、修正ボタン、退会ボタンを表示する。どちらもcustomer-check.php
 if (!isset($_SESSION['customer'])) {
 
     echo '<div class="left3">';
     echo '<button type="submit" name="confirm" style="background-color:#77FFFF;" value="kakutei">' . '確認' . '</button>';
     echo '</form></div>';
-    echo '<br><br>';
+
 } else {
 
     echo '<table class="left3">';
@@ -198,7 +191,7 @@ if (!isset($_SESSION['customer'])) {
     echo '<td><input type="submit" style="color: white;background-color:#9999FF;border-color: #CC0033;" value="退会"></td>';
     echo '</form>';
     echo '</table>';
-    echo '<br><br>';
+
 }
 
 //入力情報のセッションを初期化する

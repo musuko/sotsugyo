@@ -11,19 +11,20 @@
 
 //変数にチェック済みの入力内容を代入する
 
-$name1 = $_SESSION['form']['name1f'];                        //漢字の性
-$name2 = $_SESSION['form']['name2f'];                       //漢字の名
-$furigana1 = $_SESSION['form']['furigana1f'];              //フリガナの性
-$furigana2 = $_SESSION['form']['furigana2f'];             //フリガナの性
-$postcode = $_SESSION['form']['postcodef'];
-$address1 = $_SESSION['form']['address1f'];
-$address2 = $_SESSION['form']['address2f'];
-$address4 = $_SESSION['form']['address4f'];
-$telno = $_SESSION['form']['telnof'];
-$birthdate = $_SESSION['form']['birthdatef'];
-$email = $_SESSION['form']['emailf'];
-$login = $_SESSION['form']['loginf'];
-$password = $_SESSION['form']['passwordf'];
+$name1 = $_SESSION['form']['name1'];                        //漢字の性
+$name2 = $_SESSION['form']['name2'];                       //漢字の名
+$furigana1 = $_SESSION['form']['furigana1'];              //フリガナの性
+$furigana2 = $_SESSION['form']['furigana2'];             //フリガナの性
+$postcode = $_SESSION['form']['postcode'];
+$address1 = $_SESSION['form']['address1'];
+$address2 = $_SESSION['form']['address2'];
+$address3 = $_SESSION['form']['address3'];
+$address4 = $_SESSION['form']['address4'];
+$telno = $_SESSION['form']['telno'];
+$birthdate = $_SESSION['form']['birthdate'];
+$email = $_SESSION['form']['email'];
+$login = $_SESSION['form']['login'];
+$password = $_SESSION['form']['password'];
 
 
 
@@ -31,7 +32,7 @@ echo '<form action="customer-output.php" method="post">';
 echo '<table>';
 
 echo '<tr><td align="center"><b>お名前</b></td><td>';
-echo $name1.$name1_c;
+echo $name1;
 echo '</td></tr><td></td><td>';
 echo $name2 ,'</td></tr>';
 
