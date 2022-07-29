@@ -75,7 +75,7 @@ if (isset($_SESSION['customer'])) {
 				<td>' . number_format($value['price_at']) . '</td>
 				<td>' . $value['count'] . '</td>
 				<td><a href="review-input.php?product_id=', $value['id'],
-						'&purchase_id=', $value['purchase_id'], '">投稿</a></td>
+		'&purchase_id=', $value['purchase_id'], '">投稿</a></td>
 				<td>' . number_format($eachtotal) . '</td></tr>';
 
 		//データを変数に格納しておく
@@ -89,26 +89,28 @@ if (isset($_SESSION['customer'])) {
 		$purchase_date_stock = $value['purchase_date'];
 	}
 
+	if (isset($value['purchase_id'])) {
+		echo '<tr><td>小計</td><td></td><td></td><td></td><td></td><td></td>' .
+			'<td>' . number_format($subtotal_stock) . '</td>';
 
-	echo '<tr><td>小計</td><td></td><td></td><td></td><td></td><td></td>' .
-		'<td>' . number_format($subtotal_stock) . '</td>';
+		echo '<tr><td>消費税</td><td></td><td></td><td></td><td></td><td></td>' .
+			'<td>' . number_format($value['tax']) . '</td>';
 
-	echo '<tr><td>消費税</td><td></td><td></td><td></td><td></td><td></td>' .
-		'<td>' . number_format($value['tax']) . '</td>';
+		//合計をだす
+		$total = $subtotal_stock + $value['tax'];
+		echo '<tr><td>合計</td><td></td><td></td><td></td><td></td><td></td><td>' .
+			number_format($total) . '</td></tr>';
 
-	//合計をだす
-	$total = $subtotal_stock + $value['tax'];
-	echo '<tr><td>合計</td><td></td><td></td><td></td><td></td><td></td><td>' .
-		number_format($total) . '</td></tr>';
-
-	echo '<tr><td>購入日</td><td></td><td></td>
+		echo '<tr><td>購入日</td><td></td><td></td>
 			<td></td><td></td><td></td><td>' .
-		date('Y/m/d', strtotime($value['purchase_date'])) . '</td></tr>';
+			date('Y/m/d', strtotime($value['purchase_date'])) . '</td></tr>';
 
-	echo '</table>';
-	echo '<br>';
-	echo '</div>';
-
+		echo '</table>';
+		echo '<br>';
+		echo '</div>';
+	} else {
+		echo "購入履歴は、まだありません。";
+	}
 } else {
 	echo '<div class="page"> </div>';
 	echo '<div class="left2">';
