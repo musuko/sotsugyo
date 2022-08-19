@@ -13,7 +13,7 @@ require "product2.php";
 } else {
 	echo '管理者ログインをお願いします。';
 	echo 'ログインして下さい。';
-	echo '<form action="login-output2.php" method="post">
+	echo '<form action="login-relay2.php" method="post">
     ログイン名<input type="text" name="login"><br>
     パスワード<input type="password" name="password"><br>
     <input type="submit" value="ログイン">

@@ -236,11 +236,13 @@ function rank()
 		$sql->bindParam(2, $date_from[$i], PDO::PARAM_INT);
 		// $sql->bindParam(3, $display, PDO::PARAM_INT); AND display=?
 		$sql->execute();
+		// $data = $sql -> fetchall(); var_dump($data);
 		//売上テーブルランキング更新
 		$count_rank[$i] = 0;
+		$row['rank'] = 0;
 		foreach ($sql as $row) {
 			// print_r($row);
-			// echo $i.' '. $row['product_id'] . ' ' . $row['count'] . ' ' . $row['rank'].'<br>';
+			// echo $i.'PIYO '. $row['product_id'] . ' ' . $row['count'] . ' ' . $row['rank'].'<br>';
 			$sql1 = 'UPDATE product SET ' . $ranking[$i] . '=? WHERE id =?';
 			// echo $sql1;
 			$sql = $pdo->prepare($sql1);
